@@ -326,80 +326,133 @@ azure files - arquivos do azure
 
 ## implantar e gerenciar os recursos de computação do Azure
 
-VMs
+IaaS - ex: vm  - porque não tenho acesso ao datacenter/infraestrutura
+
+PaaS - ex: Banco de Dados SQL - porque não tenho acesso ao SO, eu crio diretamente um DB no azure,
+
+SaaS -  ex: Sharepoint - só uso a identidade para fazer autenticação.
 
 
+VM
+- é possivel criar um novo disco com a maquina ligada
+- se quiser alterar o disco precisa desligar a vm
+
+Spot do Azure voce cria a vm mais barato mas se a microsoft precisar do recurso excluir sua vm
+
+Conjunto de Disponibilidade é possivel criar um e atribuir
+
+VM
+- é possivel criar um novo disco com a maquina ligada
+- se quiser alterar o disco precisa desligar a vm
+
+Spot do Azure voce cria a vm mais barato mas se a microsoft precisar do recurso excluir sua vm
 
 
+Conjunto de Disponibilidade é possivel criar um e atribuir a vms ,é como se voce estiver distribuindo os recursos para diferentes servidores dentro do data center. se um servidor cair nao vai parar tudo.
+- 99,95% de SLA
+Conjunto de Disponibilidade proteção contra falha de energia e falha de host
+Dominio de falha  como se fosse os racks
+dominios de atualização como se fosse os servidores
 
 
+escala vertical adicionar recursos na vm ex: adicionar disco
+
+escala horizontal adicionar recursos e depois retira, ex: adicionou dois discos , retira os dois discos.
+
+Conjunto de Dimensionamento de Máquinas Virtuais (VMSS) alta disponibilidade modelo elastico
+- Condições de dimensionamento = o padrão é 10 minutos
 
 
+PaaS 
+apps service plan é um paas
+Plano de serviço de aplicativo
+
+oque é slot de implantação  ex: pastas de implantação. não precisa parar para poder trocar, alta disponibilidade
+- gratuito é o F1
+- standard tem 5 slots
+- premium tem 20 slots 
+- isolado tem 20 slots alto desempenho
+
+escala vertical estou  alterando o plano ex: f1 para standard ou premium
+escala horizontal estou alterando as capacidades ex: manual automatico etc.
 
 
+Serviços de aplicativos do azure
+- .net
+- node.js
+- php
+- java
+- python no linux
 
 
+o app padrão tem esse dominio: azurewebsites.net
+
+MODELO F1 não da suporte a BACKUP
 
 
+o  cofre de backup precisa estar na mesma regiao do recurso, então se voce tiver duas vms uma no brazil outra no US voce precisa ter 2 vaults
+
+backup
+
+é necessario ter um Centro de backup
+é necessario ter um Cofre na mesma regiao do recurso que ta sendo backpiado
+cofre dos Serviços de Recuperação é onde vai estar o cofre.
 
 
+backup MARS faz backup do local para o backup do azure e nao precisa de vm. ex: backup de arquivos e pastas locais fs
+NÃO FAZ BACKUP EM LINUX
+Não faz backup de aplicativos
+conFigurando o MARS 
+- Cria o cofre de serviços
+- baixa o agente de backup na maquina local 
+- instalar na maquina local e registrar no cofre
+- fazer o backup
 
+Backup MABS
+- Faz backup de APLICATIVOS
+- Suporta LINUX
+- suporta VMware
+- faz backup de arquivos e pastas / vms / aplicativos /
 
+exclusão temporaria de backup
+- depois de excluir voce tem até 14 dias para cancelar a exclusão e ele voltar.
+- já é nativo nos backps
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+para excluir um cofre de backup voce precisa parar o job do backup .
 
 
 ===================================================================================================================================================================
 
 ## Monitorar e manter os recursos do Azure
 
+azure monitor
+
+metricas: são valores numericos ex: disco que está 95% de  uso
+
+logs: é uma informação ex: user logou horario , são eventos
+
+logs de atividades: para auditorias
+
+- para configurar um monitoramento é preciso ter um *workspace
+
+
+integridade do serviço validar no azure monitor
 
 
 
+alerta do azure monitor
+
+- Criar a regra > condição > severidade > escopo de destino > tipo de recurso > status
+- Grupo de ação é a notificação: email/sms/ enviar por push/serviço de voz
 
 
+exemplo pratico: voce cria um grupo de ação e adiciona dentro da regra.
 
+log analytics
 
-
-
-
-
-
-
-
-
+- pré requisito - ter um workspace
+- (KQL) são consultas comuns para pesquisas personalizadas é um modo de linguagem
+  
 
 
 
